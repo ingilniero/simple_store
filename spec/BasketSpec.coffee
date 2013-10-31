@@ -57,3 +57,13 @@ describe 'Basket', ->
 
       expect(basket.distinctCount).toEqual 0
       expect(basket.totalCount).toEqual 0
+
+  describe 'Getting the quantity of an item in basket', ->
+   it 'returns the correct quantity', ->
+     basket.add laptop
+     basket.add laptop
+
+     expect(basket.getQuantity(laptop)).toEqual 2
+
+   it 'returns 0 if the item is not in basket', ->
+     expect(basket.getQuantity(laptop)).toEqual 0

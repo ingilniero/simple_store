@@ -27,6 +27,12 @@ class Basket
     for basketItem in @items
       return basketItem if basketItem.item.id is item.id
 
+  getQuantity: (item) ->
+    if @itemExistsInBasket item
+      @getItemFromBasket(item).quantity
+    else
+      0
+
   itemExistsInBasket: (item) ->
     for basketItem in @items
       return true if basketItem.item.id is item.id
