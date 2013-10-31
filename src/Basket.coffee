@@ -25,4 +25,9 @@ class Basket
     @distinctCount = @items.length
     @totalCount++
 
+  empty: ->
+    @items = []
+    @totalCount = 0
+    @distinctCount = 0
+
 window.Basket = Basket
