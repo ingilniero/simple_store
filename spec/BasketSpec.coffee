@@ -29,6 +29,21 @@ describe 'Basket', ->
 
       expect(basket.itemExistsInBasket(laptop)).toBeTruthy()
 
+    it 'returns false if the item is not in basket', ->
+      expect(basket.itemExistsInBasket(laptop)).toBeFalsy()
+
+
+  describe 'Fetching item from basket', ->
+    it 'returns the item object if it exists', ->
+      basket.add laptop
+      result = basket.getItemFromBasket laptop
+
+      expect(result.item).toEqual laptop
+      expect(result.quantity).toEqual 1
+
+    it 'returns false if the item is not in basket', ->
+      expect(basket.getItemFromBasket(laptop)).toBeFalsy()
+
   describe 'Emptying a basket', ->
     it 'empties a basket with items in', ->
       basket.add laptop

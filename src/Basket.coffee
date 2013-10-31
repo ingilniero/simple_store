@@ -6,16 +6,9 @@ class Basket
     @distinctCount = 0
 
   add: (item) ->
-    itemInBasket = false
 
-    for basketItem in @items
-      itemInBasket = true if basketItem.item.id is item.id
-
-    if itemInBasket
-      currentItem = undefined
-      for basketItem in @items
-        currentItem = basketItem if basketItem.item.id is item.id
-
+    if @itemExistsInBasket item
+      currentItem = @getItemFromBasket item
       currentItem.quantity++
     else
       @items.push
@@ -29,5 +22,13 @@ class Basket
     @items = []
     @totalCount = 0
     @distinctCount = 0
+
+  getItemFromBasket: (item) ->
+    for basketItem in @items
+      return basketItem if basketItem.item.id is item.id
+
+  itemExistsInBasket: (item) ->
+    for basketItem in @items
+      return true if basketItem.item.id is item.id
 
 window.Basket = Basket
