@@ -1,8 +1,9 @@
 class Basket
 
-  items: []
-  totalCount:    0
-  distinctCount: 0
+  constructor: ->
+    @items = []
+    @totalCount =    0
+    @distinctCount = 0
 
   add: (item) ->
     itemInBasket = false
