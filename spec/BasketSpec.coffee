@@ -67,3 +67,11 @@ describe 'Basket', ->
 
    it 'returns 0 if the item is not in basket', ->
      expect(basket.getQuantity(laptop)).toEqual 0
+
+  describe 'Getting index of an item', ->
+    it 'returns the index', ->
+      basket.add laptop
+      expect(basket.getItemIndex(laptop)).toEqual 0
+
+    it 'returns -1 if item doesnt exist', ->
+      expect(basket.getItemIndex(laptop)).toEqual -1

@@ -27,6 +27,13 @@ class Basket
     for basketItem in @items
       return basketItem if basketItem.item.id is item.id
 
+  getItemIndex: (item) ->
+    count = 0
+    for basketItem in @items
+      return count if basketItem.item.id is item.id
+      count++
+    -1
+
   getQuantity: (item) ->
     if @itemExistsInBasket item
       @getItemFromBasket(item).quantity
