@@ -15,8 +15,7 @@ class Basket
         item:     item
         quantity: 1
 
-    @distinctCount = @items.length
-    @totalCount++
+    @updateCounts()
 
   empty: ->
     @items = []
@@ -54,8 +53,15 @@ class Basket
       itemLoc = @getItemIndex item
       @items.splice(itemLoc, 1)
 
+    @updateCounts()
+
+  updateCounts: ->
+    total = 0
+    for item in @items
+      total += item.quantity
+
     @distinctCount = @items.length
-    @totalCount -= quantity
+    @totalCount = total
 
 
 window.Basket = Basket

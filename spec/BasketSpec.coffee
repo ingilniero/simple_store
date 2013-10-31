@@ -104,3 +104,13 @@ describe 'Basket', ->
 
       expect(basket.itemExistsInBasket(mouse)).toBeFalsy()
       expect(basket.getQuantity(laptop)).toEqual 2
+
+
+    it 'should not break totalCount with invalid quantities', ->
+      basket.add laptop
+      basket.add laptop
+      basket.add mouse
+
+      basket.remove laptop, 3
+
+      expect(basket.totalCount).toEqual 1
