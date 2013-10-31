@@ -11,9 +11,10 @@ class Basket
       currentItem = @getItemFromBasket item
       currentItem.quantity += quantity
     else
-      @items.push
-        item:     item
-        quantity: quantity
+      @items.push {
+        item
+        quantity
+      }
 
     @updateCounts()
 
