@@ -1,5 +1,5 @@
 describe 'Basket', ->
-  it 'keeps track of items in the bascket', ->
+  it 'keeps track of items in the basket', ->
     basket = new Basket()
     item = new Item()
     basket.add item
