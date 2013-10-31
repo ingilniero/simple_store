@@ -75,3 +75,32 @@ describe 'Basket', ->
 
     it 'returns -1 if item doesnt exist', ->
       expect(basket.getItemIndex(laptop)).toEqual -1
+
+  describe 'Removing from basket', ->
+    it 'deducts the quantity passed in', ->
+      basket.add laptop
+      basket.add laptop
+
+      basket.remove laptop, 1
+
+      expect(basket.getQuantity(laptop)).toEqual 1
+      expect(basket.distinctCount).toEqual 1
+      expect(basket.totalCount).toEqual 1
+
+    it 'removes the item completely if removing the total quantity', ->
+      basket.add laptop
+      basket.add laptop
+
+      basket.remove laptop, 2
+      expect(basket.getQuantity(laptop)).toEqual 0
+      expect(basket.itemExistsInBasket(laptop)).toBeFalsy()
+
+    it 'deals with multiple items correctly', ->
+      basket.add laptop
+      basket.add laptop
+      basket.add mouse
+
+      basket.remove mouse
+
+      expect(basket.itemExistsInBasket(mouse)).toBeFalsy()
+      expect(basket.getQuantity(laptop)).toEqual 2

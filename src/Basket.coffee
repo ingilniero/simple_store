@@ -44,4 +44,18 @@ class Basket
     for basketItem in @items
       return true if basketItem.item.id is item.id
 
+  remove: (item, quantity = 1) ->
+    return unless @itemExistsInBasket item
+
+    basketItem = @getItemFromBasket item
+    basketItem.quantity -= quantity
+
+    if basketItem.quantity < 1
+      itemLoc = @getItemIndex item
+      @items.splice(itemLoc, 1)
+
+    @distinctCount = @items.length
+    @totalCount -= quantity
+
+
 window.Basket = Basket
