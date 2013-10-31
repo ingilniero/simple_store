@@ -23,6 +23,12 @@ describe 'Basket', ->
       expect(basket.totalCount).toEqual 3
       expect(basket.distinctCount).toEqual 2
 
+   it 'allows more than 1 item to be added', ->
+     basket.add laptop, 2
+     expect(basket.totalCount).toEqual 2
+     expect(basket.distinctCount).toEqual 1
+     expect(basket.getQuantity(laptop)).toEqual 2
+
   describe 'Finding and item in basket', ->
     it 'returns true if the item exists', ->
       basket.add laptop

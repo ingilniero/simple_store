@@ -5,15 +5,15 @@ class Basket
     @totalCount =    0
     @distinctCount = 0
 
-  add: (item) ->
+  add: (item, quantity = 1) ->
 
     if @itemExistsInBasket item
       currentItem = @getItemFromBasket item
-      currentItem.quantity++
+      currentItem.quantity += quantity
     else
       @items.push
         item:     item
-        quantity: 1
+        quantity: quantity
 
     @updateCounts()
 
