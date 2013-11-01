@@ -56,6 +56,12 @@ class Basket
 
     @updateCounts()
 
+  totalPrice: ->
+    price = 0
+    for item in @items
+      price += item.quantity * item.item.price
+    price
+
   updateCounts: ->
     total = 0
     for item in @items

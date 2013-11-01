@@ -29,6 +29,20 @@ describe 'Basket', ->
      expect(basket.distinctCount).toEqual 1
      expect(basket.getQuantity(laptop)).toEqual 2
 
+
+  describe 'Total price', ->
+    it 'calculates the total price', ->
+      basket.add laptop, 2
+      basket.add mouse, 3
+      expect(basket.totalPrice()).toEqual 830
+
+    it 'correctly updates the price', ->
+      basket.add laptop, 2
+      basket.add mouse, 2
+      basket.remove laptop, 1
+
+      expect(basket.totalPrice()).toEqual 420
+
   describe 'Finding and item in basket', ->
     it 'returns true if the item exists', ->
       basket.add laptop
