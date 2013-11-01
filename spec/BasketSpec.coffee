@@ -43,6 +43,23 @@ describe 'Basket', ->
 
       expect(basket.totalPrice()).toEqual 420
 
+  describe 'Appliying discounts', ->
+    it 'applies a discount', ->
+      basket.add laptop
+      basket.setDiscount 10
+      expect(basket.totalPrice()).toEqual 360
+
+    it 'persits the discount', ->
+      basket.add laptop
+      basket.setDiscount 10
+      basket.add mouse, 2
+      expect(basket.totalPrice()).toEqual 378
+
+    it 'deals with negative discounts', ->
+      basket.setDiscount -10
+      basket.add mouse
+      expect(basket.totalPrice()).toEqual 9
+
   describe 'Finding and item in basket', ->
     it 'returns true if the item exists', ->
       basket.add laptop

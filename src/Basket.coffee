@@ -4,6 +4,7 @@ class Basket
     @items = []
     @totalCount =    0
     @distinctCount = 0
+    @discountAmount = 0
 
   add: (item, quantity = 1) ->
 
@@ -17,6 +18,9 @@ class Basket
       }
 
     @updateCounts()
+
+  applyDiscount: (price) ->
+    price * (1 - (@discountAmount / 100))
 
   empty: ->
     @items = []
@@ -56,11 +60,16 @@ class Basket
 
     @updateCounts()
 
+  setDiscount: (amount) ->
+    @discountAmount = Math.abs amount
+
+
   totalPrice: ->
     price = 0
     for item in @items
       price += item.quantity * item.item.price
-    price
+
+    @applyDiscount price
 
   updateCounts: ->
     total = 0
