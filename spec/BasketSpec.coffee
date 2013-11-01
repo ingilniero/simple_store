@@ -44,21 +44,29 @@ describe 'Basket', ->
       expect(basket.totalPrice()).toEqual 420
 
   describe 'Appliying discounts', ->
+    beforeEach ->
+      @addMatchers
+        toBeDiscounted: (orig, discount) ->
+          actual = @actual
+          @message = -> "Expected #{actual} to be #{discount}% of #{orig}"
+
+          actual is (orig * (1 -(discount / 100)))
+
     it 'applies a discount', ->
       basket.add laptop
       basket.setDiscount 10
-      expect(basket.totalPrice()).toEqual 360
+      expect(basket.totalPrice()).toBeDiscounted(400, 10)
 
     it 'persits the discount', ->
       basket.add laptop
       basket.setDiscount 10
       basket.add mouse, 2
-      expect(basket.totalPrice()).toEqual 378
+      expect(basket.totalPrice()).toBeDiscounted(420, 10)
 
     it 'deals with negative discounts', ->
       basket.setDiscount -10
       basket.add mouse
-      expect(basket.totalPrice()).toEqual 9
+      expect(basket.totalPrice()).toBeDiscounted(10, 10)
 
   describe 'Finding and item in basket', ->
     it 'returns true if the item exists', ->
